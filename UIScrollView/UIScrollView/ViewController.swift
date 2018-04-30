@@ -53,6 +53,31 @@ class ViewController: UIViewController {
         pageView.addSubview(titleLabel)
         return pageView
     }
+    
+    func createContentsView(contentList: Array<Photo>) -> UIView {
+        // ページを追加するコンテンツビューを作る
+        let contentView = UIView()
+        // 1ページの幅と高さ
+        let pageWidth = self.view.frame.width
+        let pageHeight = scrollView.frame.height
+        let pageViewRect = CGRect(x:0, y:0, width:pageWidth, height: pageHeight)
+        // 写真の縦横サイズ（正方向）
+        let photoSize = CGSize(width: 250, height: 250)
+        // ページを並べたコンテンツビュー全体のサイズ
+        contentView.frame = CGRect(x: 0, y: 0, width: pageWidth*4, height: pageHeight)
+        // ページの背景色
+        let colors: Array<UIColor> = [.cyan, .yellow, .lightGray, .orange]
+        // 写真コンテンツのページを作ってサブビューに追加する
+        for i in 0..<contentList.count {
+            // 写真のファイル名とタイトルを順に取り出す
+            let contentItem = contentList[i]
+            // ページのビューを作る
+            let pageView = createPage(viewRect: pageViewRect, imageSize: photoSize, item: contentItem)
+            // コンテンツビューにページビューを並べて追加していく
+            contentView.addSubview(pageView)
+        }
+        return contentView
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

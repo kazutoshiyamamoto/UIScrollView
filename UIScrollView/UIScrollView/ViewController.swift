@@ -73,6 +73,11 @@ class ViewController: UIViewController {
             let contentItem = contentList[i]
             // ページのビューを作る
             let pageView = createPage(viewRect: pageViewRect, imageSize: photoSize, item: contentItem)
+            // ページの表示座標を決める
+            let left = pageViewRect.width * CGFloat(i)
+            let xy = CGPoint(x: left, y:0)
+            pageView.frame = CGRect(origin: xy, size: pageViewRect.size)
+            pageView.backgroundColor = colors[i]
             // コンテンツビューにページビューを並べて追加していく
             contentView.addSubview(pageView)
         }

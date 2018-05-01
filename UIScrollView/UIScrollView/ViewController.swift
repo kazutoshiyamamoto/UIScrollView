@@ -33,7 +33,6 @@ class ViewController: UIViewController {
             Photo(imageName:"photo3", title:"蓮の花"),
             Photo(imageName:"photo4", title:"夏の垣根")
             ]
-    }
     
     // サブビューを作る
     let subView = createContentsView(contentList: photoList)
@@ -41,8 +40,16 @@ class ViewController: UIViewController {
     scrollView.addSubview(subView)
     // スクロールビューの設定
     scrollView.isPagingEnabled = true // ページ送りする
-    scrollView.contentsSize = subView.frame.size // コンテンツサイズ
+    scrollView.contentSize = subView.frame.size // コンテンツサイズ
     scrollView.contentOffset = CGPoint(x:0, y:0) // スクロール開始位置
+    
+    // ページコントロールを設定する
+    pageControll.numberOfPages = photoList.count
+    pageControll.currentPage = 0
+    // ページコントロールのドットの色
+    pageControll.pageIndicatorTintColor = UIColor.lightGray
+    pageControll.currentPageIndicatorTintColor = UIColor.black
+}
     
     
     // 写真とタイトルがある１ページ分のビューを作る

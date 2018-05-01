@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIScrollViewDelegate {
 
     // スクロールビューをOutlet接続する
     @IBOutlet weak var scrollView: UIScrollView!
@@ -42,6 +42,8 @@ class ViewController: UIViewController {
     scrollView.isPagingEnabled = true // ページ送りする
     scrollView.contentSize = subView.frame.size // コンテンツサイズ
     scrollView.contentOffset = CGPoint(x:0, y:0) // スクロール開始位置
+    // スクロールビューのデリゲートになる
+    scrollView.delegate = self
     
     // ページコントロールを設定する
     pageControll.numberOfPages = photoList.count
@@ -99,6 +101,14 @@ class ViewController: UIViewController {
             contentView.addSubview(pageView)
         }
         return contentView
+    }
+    
+    // スクロールしたらページコントロールを更新する
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // カレントページを調べる
+        let pageNo = Int(scrollView.contentOffset.x/scrollView.frame.width)
+        // 表示をカレントページに合わせる
+        pageControll.currentPage = pageNo
     }
 
     override func didReceiveMemoryWarning() {

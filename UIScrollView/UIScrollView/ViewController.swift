@@ -35,6 +35,16 @@ class ViewController: UIViewController {
             ]
     }
     
+    // サブビューを作る
+    let subView = createContentsView(contentList: photoList)
+    // スクロールビューにサブビューを追加する
+    scrollView.addSubview(subView)
+    // スクロールビューの設定
+    scrollView.isPagingEnabled = true // ページ送りする
+    scrollView.contentsSize = subView.frame.size // コンテンツサイズ
+    scrollView.contentOffset = CGPoint(x:0, y:0) // スクロール開始位置
+    
+    
     // 写真とタイトルがある１ページ分のビューを作る
     func createPage(viewRect:CGRect, imageSize:CGSize, item:Photo) -> UIView {
         let pageView = UIView(frame: viewRect)
